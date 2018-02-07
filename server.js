@@ -55,3 +55,14 @@ app.put("/quotes", (req, res) => {
     }
 )
 })
+
+app.delete("/quotes", (req, res) => {
+  db.collection("quotes").findOneAndDelete(
+    {
+      name: req.body.name
+    }, (err, results) => {
+      if (err) return res.send(500, err)
+      res.send({message: 'A quote by Jeffrey was deleted!'})
+    }
+  )
+})

@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MY APP</title>
+  <title>Node-Intro</title>
 </head>
 <body>
-  May Node and Express be with you.
-
+  <h1>Node, Express, and MongoDB Quote Storage</h1>
   <ul class="quotes">
-    <h2>Quotes:</h2>
   <% for(var i=0; i<quotes.length; i++) {%>
     <li class="quote">
       <span><%= quotes[i].name %>:</span>
@@ -24,9 +22,13 @@
   </form>
 
   <div>
-    <h2>Replace last quote written by Jerome with a quote written by Jeffrey</h2>
-    <button id="update"> Replace Jerome w/ Jeffrey </button>
+    <br>
+    <button id="update">Replace Jerome's last quote w Jeffrey quote</button>
+    <button id="delete">Delete Jeffrey's Last Quote</button>
   </div>
+
+  <div id="footer">
+    <h6>Adapted from https://zellwk.com/blog/crud-express-mongodb/ </h6>
 
 <script src="main.js"></script>
 </body>
