@@ -13,15 +13,17 @@ MongoClient.connect("mongodb://dsalib:daniel98@ds125048.mlab.com:25048/dsalib-st
   });
 });
 
+app.set("view engine", "ejs")
+app.use(bodyParser.json())
+app.use(express.static("public"))
+
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.get("/", (req,res) => {
-  res.sendFile("/Users/danielsalib/Desktop/Learning & Projects/Node Intro" + "/index.html")
-});
-
 app.get("/", (req, res) => {
-  var cursor = db.collection("quotes").find().toArray(function(err, results){
-    console.log(results);
+  var cursor = db.collection("quotes").find().toArray((err, results) => {
+    if (err) return console.log(err);
+    //render index.ejs
+    res.render("index.ejs", {quotes: results})
   })
 })
 
@@ -29,6 +31,27 @@ app.post("/quotes", (req, res) => {
   db.collection("quotes").save(req.body, (err,result) => {
     if (err) return console.log(err);
 
+    console.log("Saved to DB")
     res.redirect("/");
   })
+})
+
+app.put("/quotes", (req, res) => {
+  db.collection('quotes').findOneAndUpdate(
+  {
+    name: 'Jerome'
+  },
+  {
+    $set:
+    { name: req.body.name,
+      quote: req.body.quote }
+  },
+  {
+    sort: {_id: -1},
+    upsert: false
+  }, (err, result) => {
+      if (err) return res.send(err)
+      res.send(result)
+    }
+)
 })
