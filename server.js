@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 var db;
 
-MongoClient.connect("mongodb://dsalib:daniel98@ds125048.mlab.com:25048/dsalib-star-wars", (err, client) => {
+MongoClient.connect("mongodb://db credentials", (err, client) => {
   if (err) return console.log(err)
   db = client.db("dsalib-star-wars")
   app.listen(3000, function() {
