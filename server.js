@@ -13,6 +13,8 @@ MongoClient.connect("mongodb://db credentials", (err, client) => {
   });
 });
 
+console.log("yooooooo");
+
 app.set("view engine", "ejs")
 app.use(bodyParser.json())
 app.use(express.static("public"))
